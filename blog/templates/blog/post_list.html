@@ -1,40 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Blog do Ricardo</title>
-    </head>
-    <body>
-        <header>
-            <h1><a href="/">Blog do Ricardo</a></h1>
-        </header>
+{% extends 'blog/base.html' %}
 
-        {% for post in posts%}
-            <article>
-                <h2><a href="">{{ post.title }}</a></h2>
-                <p>{{ post.text|linebreaksbr }}</p>
-                <time>published: {{ post.published_date }}</time>
-                <br>    
-            </article>
-        {% endfor %}    
-        
-        <!--
-        <article>
-            <time>published: 05.11.2025, 16:26</time>
-            <h3><a href="">Meu segundo post</a></h3>
-            <p>Moro no bairro agua mineral, zona norte de Teresina, cidade que mais faz calor no mundo.</p>
+{% block content %}
+    {% for post in posts%}
+        <article class="post">
+            <time class="date">
+                published: {{ post.published_date }}
+            </time>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+            <br>    
         </article>
-        <h1>Eu sou importante</h1>
-        <h2>Eu sou o segundo mais importante</h2>
-        <h3>Eu o terceiro</h3>
-        <p>Eu sou um paragrafo</p>
-        <em>Eu dou enfase no meu texto</em>
-        <br>
-        <strong>Eu dou uma enfase mais forte</strong>
-        <br>
-        <a href="instagram.com/oricaardo">link</a>
-        <ul><li>Primeiro item da lista</li><li>Segundo item da lista</li></ul>
-        <div></div>  Define uma seção da pagina 
-        <nav></nav>  Define um conjunto de links de navegacao   
-        -->
-    </body>
-</html>
+    {% endfor %}
+{% endblock %}
